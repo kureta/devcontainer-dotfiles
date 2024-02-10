@@ -1,0 +1,10 @@
+[init]
+	defaultBranch = main
+[user]
+	email = skureta@gmail.com
+	name = kureta
+[push]
+	followTags = true
+	autoSetupRemote = true
+[pull]
+	ff = only

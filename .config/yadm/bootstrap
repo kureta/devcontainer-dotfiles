@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# have to add manually
+mason_packages="neocmakelsp yaml-language-server ruff-lsp typst-lsp taplo bash-debug-adapter bash-language-server clangd codelldb debugpy docker-compose-language-service dockerfile-language-server hadolint json-lsp lua-language-server luacheck marksman prettierd pyright ruff shellcheck shfmt stylua"
+
+pac="pacman -S --noconfirm"
+
+echo "Installing shell dependencies..."
+sudo $pac base-devel openssh starship pkgfile zsh fzf lsd trash-cli tmux bat zsh-autosuggestions zsh-completions zsh-syntax-highlighting thefuck neovim ripgrep lazygit gdu bottom python nodejs npm tree-sitter-cli zoxide python-pynvim cmake unzip cargo luarocks
+sudo pkgfile -u
+
+echo "Installing AstroNvim..."
+git clone --depth 1 git@github.com:AstroNvim/AstroNvim.git ~/.config/nvim
+ln -s ~/.config/astronvim ~/.config/nvim/lua/user
+
+if [[ -v WAYLAND_DISPLAY ]]; then
+	echo "Installing vim clipboard support for wayland..."
+	sudo $pac wl-clipboard
+elif [[ -v DISPLAY ]]; then
+	echo "Installing vim clipboard support for xorg..."
+	sudo $pac xclip
+else
+	echo "No desktop environment detected, skipping clipboard support..."
+fi
+
+echo "Installing tmux plugins..."
+git clone git@github.com:tmux-plugins/tpm.git ~/.config/tmux/plugins/tpm
+~/.config/tmux/plugins/tpm/scripts/install_plugins.sh
+
+echo "Changing default shell to zsh..."
+sudo chsh -s /usr/bin/zsh "$(whoami)"
+
+echo "Installing lazy plugins..."
+nvim --headless +qa
+echo "Installing Tree Sitter parsers and LSP servers..."
+nvim --headless +TSInstallSync +"MasonInstall $mason_packages" +qa
+
+echo "Log out and back in to change shell to zsh"
