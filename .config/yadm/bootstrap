@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # have to add manually
-mason_packages="neocmakelsp yaml-language-server ruff-lsp typst-lsp taplo bash-debug-adapter bash-language-server clangd codelldb debugpy docker-compose-language-service dockerfile-language-server hadolint json-lsp lua-language-server luacheck marksman prettierd pyright ruff shellcheck shfmt stylua"
+mason_packages="yaml-language-server ruff-lsp taplo bash-debug-adapter bash-language-server debugpy docker-compose-language-service dockerfile-language-server hadolint json-lsp lua-language-server luacheck marksman prettierd pyright ruff shellcheck shfmt stylua"
 
 pac="pacman -S --noconfirm"
 
 echo "Installing shell dependencies..."
-sudo $pac base-devel openssh starship pkgfile zsh fzf lsd trash-cli tmux bat zsh-autosuggestions zsh-completions zsh-syntax-highlighting thefuck neovim ripgrep lazygit gdu bottom python nodejs npm tree-sitter-cli zoxide python-pynvim cmake unzip cargo luarocks
+sudo $pac base-devel openssh starship pkgfile zsh fzf lsd tmux bat zsh-autosuggestions zsh-completions zsh-syntax-highlighting neovim ripgrep lazygit gdu bottom python nodejs npm tree-sitter-cli zoxide python-pynvim unzip cargo luarocks
 sudo pkgfile -u
 
 echo "Installing AstroNvim..."
