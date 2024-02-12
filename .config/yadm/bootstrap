@@ -3,7 +3,19 @@
 # have to add manually
 mason_packages="yaml-language-server ruff-lsp taplo bash-debug-adapter bash-language-server debugpy docker-compose-language-service dockerfile-language-server hadolint json-lsp lua-language-server luacheck marksman prettierd pyright ruff shellcheck shfmt stylua"
 
+if [[ $(cat /etc/*release* | grep -q "arch") ]]; then
+	echo arch
+fi
+exit 0
 pac="pacman -S --noconfirm"
+# elif [[ $(cat /etc/*release* | grep -q "Debian") ]]; then
+# 	pac="apt-get install -y"
+# elif [[ $(cat /etc/*release* | grep -q "Ubuntu") ]]; then
+# 	pac="apt-get install -y"
+# else
+# 	echo "Unsupported OS, exiting..."
+# 	exit 1
+# fi
 
 echo "Installing shell dependencies..."
 sudo $pac base-devel openssh starship pkgfile zsh fzf lsd tmux bat zsh-autosuggestions zsh-completions zsh-syntax-highlighting neovim ripgrep lazygit gdu bottom python nodejs npm tree-sitter-cli zoxide python-pynvim unzip cargo luarocks
