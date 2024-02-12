@@ -2,14 +2,12 @@
 
 # have to add manually
 mason_packages="yaml-language-server ruff-lsp taplo bash-debug-adapter bash-language-server debugpy docker-compose-language-service dockerfile-language-server hadolint json-lsp lua-language-server luacheck marksman prettierd pyright ruff shellcheck shfmt stylua thefuck"
+
 ts_parsers="bash c lua markdown markdown_inline python query vim vimdoc dockerfile json jsonc toml yaml"
 
+cat /etc/*release*
 if cat /etc/*release* | grep -q "Arch Linux"; then
 	inst="pacman -S --noconfirm"
-elif cat /etc/*release* | grep -q "Debian"; then
-	inst="apt-get install -y"
-elif cat /etc/*release* | grep -q "Ubuntu"; then
-	inst="apt-get install -y"
 else
 	echo "Unsupported OS, exiting..."
 	exit 1
